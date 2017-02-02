@@ -1,0 +1,24 @@
+<div class="todo-list">
+
+    <h2 class="text-center w-100 mt-3">My todo list</h2>
+
+    <div class="d-flex justify-content-center input-task m-5">
+        <div class="input-group w-75">
+            <input type="text" class="form-control" placeholder="Task description..." [(ngModel)]="newTask" (keypress)="addTask($event.keyCode === 13 )">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" (click)="addTask(true)">Add new task</button>
+            </span>
+        </div>
+    </div>
+
+    <p  *ngIf="!tasks.length"><em>No TODO task found...</em></p>
+    
+    <ul class="list-group" *ngIf="tasks.length list">
+        <li class="list-group-item row" *ngFor="let task of tasks; let i = index">
+            <p class="col-lg-11">{{ task }}</p>
+            <div class="col-lg-1">
+                <button class="btn btn-danger push-right" type="button" (click)="removeTask(i)">Remove</button>
+            </div>
+        </li>
+    </ul>
+</div>
