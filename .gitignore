@@ -1,2 +1,8 @@
 .DS_Store
 node_modules/
+app/*.js
+app/*.js.map
+e2e/*.js
+e2e/*.js.map
+app/**/*.js
+app/**/*.js.map
