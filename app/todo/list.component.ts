@@ -10,6 +10,8 @@ import {
     AfterViewChecked 
 } from '@angular/core';
 
+import {Task} from './task';
+
 @Component({
     moduleId:     module.id,
     selector:    'app-list',
@@ -27,7 +29,7 @@ implements  OnChanges,
             AfterViewChecked,
             OnDestroy 
 {
-    private tasks: Array<string> = [];
+    private tasks: Array<Task> = [];
     private newTask: string;
 
     constructor() { }
@@ -35,7 +37,9 @@ implements  OnChanges,
     ngOnChanges() {}
 
     ngOnInit() { 
-        this.tasks.push('This is an example of todo task');
+        this.tasks.push(
+            new Task('This is an example of todo task')
+        );
     }
 
     ngDoCheck() { }
@@ -49,7 +53,7 @@ implements  OnChanges,
 
     addTask(isEnterPressed: boolean) {
         if (isEnterPressed && this.newTask && this.newTask.length) {
-            this.tasks.push(this.newTask);
+            this.tasks.push(new Task(this.newTask));
             this.newTask = '';
         }
     }
