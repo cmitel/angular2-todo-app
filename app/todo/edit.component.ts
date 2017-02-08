@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     moduleId: module.id,
     selector: 'app-edit',
-    template: '<p>TODO edit</p>',
+    templateUrl: 'edit.html',
     styles: [ 'background-color: cyan' ]
 })
 
