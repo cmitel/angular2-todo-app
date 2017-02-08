@@ -1,0 +1,11 @@
+<div class="todo-list">
+
+    <h2 class="text-center w-100 mt-3">View todo</h2>
+    
+    <ul>
+        <li><strong>Id : </strong>{{ task.id }}</li>
+        <li><strong>Create date : </strong>{{ task.createDate | date:'dd/mm/YYYY' }}</li>
+        <li><strong>Update date : </strong>{{ task.updateDate | date:'dd/mm/YYYY' }}</li>
+        <li><strong>Description : </strong>{{ task.description }}</li>
+    </ul>
+</div>

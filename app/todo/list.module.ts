@@ -5,13 +5,14 @@ import { HttpModule }       from '@angular/http';
 
 import { ListComponent }    from './list.component';
 import { EditComponent }    from './edit.component';
+import { ShowTodoComponent }    from './show-todo.component';
 
 import { TasksService }     from './tasks.service';
 
 @NgModule({
     imports:         [ BrowserModule, FormsModule, HttpModule ],
-    exports:         [ ListComponent, EditComponent ],
-    declarations:    [ ListComponent, EditComponent ],
+    exports:         [ ListComponent, EditComponent, ShowTodoComponent ],
+    declarations:    [ ListComponent, EditComponent, ShowTodoComponent ],
     providers:       [ TasksService ]
 })
 export class ListModule { }
