@@ -2,10 +2,14 @@
 
     <h2 class="text-center w-100 mt-3">View todo</h2>
     
-    <ul>
+    <em *ngIf="!task">No task found...</em>
+
+    <ul *ngIf="task">
         <li><strong>Id : </strong>{{ task.id }}</li>
         <li><strong>Create date : </strong>{{ task.createDate | date:'dd/mm/YYYY' }}</li>
         <li><strong>Update date : </strong>{{ task.updateDate | date:'dd/mm/YYYY' }}</li>
         <li><strong>Description : </strong>{{ task.description }}</li>
     </ul>
+
+    <button type="button" class="btn btn-primary" (click)="goBack()">go back</button>
 </div>
