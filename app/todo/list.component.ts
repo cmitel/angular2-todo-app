@@ -10,7 +10,11 @@ import {
     AfterViewChecked 
 } from '@angular/core';
 
+import { TasksService } from './tasks.service';
+
 import {Task} from './task';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     moduleId:     module.id,
@@ -29,17 +33,16 @@ implements  OnChanges,
             AfterViewChecked,
             OnDestroy 
 {
-    private tasks: Array<Task> = [];
+    private tasks: Observable<Task[]>;
     private newTask: string;
+    private hasTasks: boolean = false;
 
-    constructor() { }
+    constructor(private tasksService: TasksService) { }
 
     ngOnChanges() {}
 
-    ngOnInit() { 
-        this.tasks.push(
-            new Task('This is an example of todo task')
-        );
+    ngOnInit() {
+        this.tasks = this.tasksService.getTasks();
     }
 
     ngDoCheck() { }
@@ -52,18 +55,18 @@ implements  OnChanges,
     // Public functionals methodes
 
     addTask(isEnterPressed: boolean) {
-        if (isEnterPressed && this.newTask && this.newTask.length) {
-            this.tasks.push(new Task(this.newTask));
-            this.newTask = '';
-        }
+        // if (isEnterPressed && this.newTask && this.newTask.length) {
+        //     this.tasks.push(new Task(this.newTask, Date.now()));
+        //     this.newTask = '';
+        // }
     }
 
     removeTask(index: number) {
-        if (index >= 0) {
-            this.tasks.splice(
-                index,
-                1
-            );
-        }
+        // if (index >= 0) {
+        //     this.tasks.splice(
+        //         index,
+        //         1
+        //     );
+        // }
     }
 }

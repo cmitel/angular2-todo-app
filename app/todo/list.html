@@ -11,14 +11,14 @@
         </div>
     </div>
 
-    <p  *ngIf="!tasks.length"><em>No TODO task found...</em></p>
+    <p  *ngIf="(tasks | async)?.length === null || (tasks | async)?.length <= 0"><em>No TODO task found...</em></p>
     
-    <ul class="list-group" *ngIf="tasks.length list">
-        <li class="list-group-item row" *ngFor="let task of tasks; let i = index">
-            <p class="col-lg-8">{{ task.description }} | {{ task.updateDate | date:'dd/MM/yyyy' }}</p>
-            <button class="col-lg-1 m-1 btn btn-secondary push-right" type="button" (click)="displayTask(i)">Display</button>
-            <button class="col-lg-1 m-1 btn btn-warning push-right" type="button" (click)="editTask(i)">Edit</button>
-            <button class="col-lg-1 m-1 btn btn-danger push-right" type="button" (click)="removeTask(i)">Remove</button>
+    <ul class="list-group" *ngIf="(tasks | async)?.length !== null && (tasks | async)?.length >= 0">
+        <li class="list-group-item row" *ngFor="let task of tasks | async">
+            <p class="col-lg-8">{{ task.description }}</p>
+            <button class="col-lg-1 m-1 btn btn-secondary push-right" type="button" (click)="displayTask()">Display</button>
+            <button class="col-lg-1 m-1 btn btn-warning push-right" type="button" (click)="editTask()">Edit</button>
+            <button class="col-lg-1 m-1 btn btn-danger push-right" type="button" (click)="removeTask()">Remove</button>
         </li>
     </ul>
 </div>
