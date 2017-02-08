@@ -69,4 +69,8 @@ implements  OnChanges,
         //     );
         // }
     }
+
+    // displayTask(selectedId: number) {
+    //     // this.router.navigate(['/detail', hero.id]);
+    // }
 }
