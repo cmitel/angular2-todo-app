@@ -19,11 +19,12 @@ export class TasksService {
 
     constructor(private http: Http) { }
 
-    getTasks(): Observable<Task[]> {
-        return this.http.get(this.tasksUrl)
-                        .delay(2000)
-                        .map((res: Response) => res.json().data as Task[])
-                        .catch(this.handleError);
+    getTasks(slowy: boolean = false): Observable<Task[]> {
+        var src = this.http.get(this.tasksUrl);
+        if (slowy) {
+            src = src.delay(slowy === true ? 2000 : 0);
+        }
+        return src.map((res: Response) => res.json().data as Task[]).catch(this.handleError);
     }
 
     addTask(task: Task): Observable<Task[]> {
@@ -39,7 +40,7 @@ export class TasksService {
 
     getTask(id: number): Observable<Task> {
         return this.getTasks()
-            .map(list => {
+            .map((list: Task[]) => {
                 return list.find(t => t.id === id);
             });
     }
