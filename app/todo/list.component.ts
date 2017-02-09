@@ -13,8 +13,10 @@ import {
 import { TasksService } from './tasks.service';
 
 import {Task} from './task';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/timer';
 
 @Component({
     moduleId:     module.id,
@@ -36,6 +38,7 @@ implements  OnChanges,
     private tasks: Observable<Task[]>;
     private newTask: string;
     private hasTasks: boolean = false;
+    private successMsg: string = '';
 
     constructor(private tasksService: TasksService) { }
 
@@ -56,25 +59,28 @@ implements  OnChanges,
 
     addTask(isEnterPressed: boolean) {
         if (isEnterPressed && this.newTask && this.newTask.length) {
-            
-            this.tasksService.addTask(new Task(this.newTask, Date.now()))
+
+            let t = new Task(this.newTask, Date.now());
+
+            this.tasksService.addTask(t)
             .subscribe(() => {
                 this.tasks = this.tasksService.getTasks();
                 this.newTask = '';
+
+                this.successMsg = `The has been well created with ID : ${t.id}`;
+                Observable.timer(2500).subscribe(() => this.successMsg = '', () => this.successMsg = '');
             });
         }
     }
 
-    removeTask(index: number) {
-        // if (index >= 0) {
-        //     this.tasks.splice(
-        //         index,
-        //         1
-        //     );
-        // }
-    }
+    removeTask(taskId: number) {
+        this.tasksService.deleteTask(taskId)
+        .subscribe(() => {
+            this.tasks = this.tasksService.getTasks();
+            this.newTask = '';
 
-    // displayTask(selectedId: number) {
-    //     // this.router.navigate(['/detail', hero.id]);
-    // }
+            this.successMsg = `The has been well deleted`;
+            Observable.timer(2500).subscribe(() => this.successMsg = '', () => this.successMsg = '');
+        });
+    }
 }
