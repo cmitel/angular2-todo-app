@@ -29,13 +29,17 @@ export class TasksService {
 
     addTask(task: Task): Observable<Task[]> {
         return this.http.post(this.tasksUrl, JSON.stringify(task), {headers: this.headers})
-                        .delay(2000)
+                        .delay(1500)
                         .map(this.extractData)
                         .catch(this.handleError);
     }
 
-    updateTask(task: Task): Observable<Task[]> {
-        return Observable.throw("Not implemented");
+    updateTask(task: Task): Observable<Task> {
+        const url = `${this.tasksUrl}/${task.id}`;
+        return this.http.put(url, JSON.stringify(task), {headers: this.headers})
+                        .delay(1000)
+                        .map(() => task)
+                        .catch(this.handleError);
     }
 
     getTask(id: number): Observable<Task> {
