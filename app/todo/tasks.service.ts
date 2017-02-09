@@ -49,6 +49,17 @@ export class TasksService {
             });
     }
 
+    deleteTask(id: number): Observable<boolean> {
+        const url = `${this.tasksUrl}/${id}`;
+        return this.http.delete(url, {headers: this.headers})
+        .map(() => true)
+        .catch(this.handleError);
+    }
+
+    /*
+        PRIVATE METHODES
+    */
+
     private extractData(res: Response) {
         console.log("Extracting data...");
         let body = res.json();
