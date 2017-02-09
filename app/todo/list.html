@@ -11,6 +11,10 @@
         </div>
     </div>
 
+    <div class="alert alert-success m-0 mb-2" role="alert" [class.display-none]="successMsg.length === 0">
+        <strong>Well done!</strong> {{ successMsg }}
+    </div>
+
     <p  *ngIf="(tasks | async)?.length === null || (tasks | async)?.length <= 0"><em>No TODO task found...</em></p>
     
     <ul class="list-group" *ngIf="(tasks | async)?.length !== null && (tasks | async)?.length >= 0">
