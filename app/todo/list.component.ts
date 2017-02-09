@@ -55,10 +55,14 @@ implements  OnChanges,
     // Public functionals methodes
 
     addTask(isEnterPressed: boolean) {
-        // if (isEnterPressed && this.newTask && this.newTask.length) {
-        //     this.tasks.push(new Task(this.newTask, Date.now()));
-        //     this.newTask = '';
-        // }
+        if (isEnterPressed && this.newTask && this.newTask.length) {
+            
+            this.tasksService.addTask(new Task(this.newTask, Date.now()))
+            .subscribe(() => {
+                this.tasks = this.tasksService.getTasks();
+                this.newTask = '';
+            });
+        }
     }
 
     removeTask(index: number) {
