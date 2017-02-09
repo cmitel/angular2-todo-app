@@ -17,7 +17,7 @@
         <li class="list-group-item row" *ngFor="let task of tasks | async">
             <p class="col-lg-8">{{ task.description }}</p>
             <a class="col-lg-1 m-1 btn btn-secondary push-right" [routerLink]="['/view', task.id]">Display</a>
-            <button class="col-lg-1 m-1 btn btn-warning push-right" type="button" (click)="editTask(task.id)">Edit</button>
+            <a class="col-lg-1 m-1 btn btn-warning push-right" [routerLink]="['/edit', task.id]">Edit</a>
             <button class="col-lg-1 m-1 btn btn-danger push-right" type="button" (click)="removeTask(task.id)">Remove</button>
         </li>
     </ul>
