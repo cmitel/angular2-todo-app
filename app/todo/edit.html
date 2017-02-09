@@ -1,12 +1,33 @@
-<div class="todo-edit">
+<div class="todo-list">
 
     <h2 class="text-center w-100 mt-3">Edit task</h2>
+    
+    <em *ngIf="!task">No task found...</em>
 
-    <div class="d-flex justify-content-center input-task m-5">
-        <div class="input-group w-75">
-            <input type="text" class="form-control" placeholder="Task description..." [(ngModel)]="currentTask">
+    <div class="form" *ngIf="task"> 
+        <ul>
+            <li><strong>Id : </strong>{{ task.id }}</li>
+            <li><strong>Create date : </strong>{{ task.createDate | date:'dd/mm/yyyy' }}</li>
+            <li><strong>Update date : </strong>{{ task.updateDate | date:'dd/mm/yyyy' }}</li>
+        </ul>
+
+        <div class="form-group row">
+            <label for="desc" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="desc" [(ngModel)]="task.description" placeholder="Task description...">
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-warning" [class.disabled]="task.description.length === 0" (click)="update()">Update</button>
+            </div>
         </div>
+
+        <div class="alert alert-success m-0" role="alert" [class.display-none]="!isSuccess">
+             <strong>Well done!</strong> The task has been well updated.
+        </div>  
+        <div class="alert alert-danger m-0" role="alert" [class.display-none]="!isError">
+             <strong>Oh snap!</strong> Unable to update the task, try later.
+        </div>  
     </div>
 
-    <button class="btn btn-primary" type="button" (click)="save()">Save</button>
+    <button type="button" class="btn btn-danger" (click)="goBack()">Go back</button>    
 </div>
