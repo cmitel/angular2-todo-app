@@ -12,10 +12,13 @@
   },
   "files": [
       "app/app.module.ts",
-      "app/main.ts"
+      "app/main.ts"      
+  ],
+  "include": [
+      "**/*.spec.ts"
   ],
   "exclude": [
-        "node_modules/*",
-        "** /*.spec.ts"
+        "node_modules/*"
+        // "**/*.spec.ts"
   ]
 }
